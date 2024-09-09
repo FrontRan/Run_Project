@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>숫자 기억 게임</h1>
+    <div id="main">
+        <p id="random_num"></p>
+        <input id="submitText" type="text" />
+        <button id="start" onclick="startGame()">시작</button>
+        <button onclick="submit()">제출</button>
+        <p id="answerZone"></p>
+    </div>
+
+    <script>
+        let num = 0;
+        let random;
+
+        function generateRandomNumber() {
+            let max = 9999;
+            let min = 1000;
+            let num = Math.floor(Math.random() * (max - min) + min);
+
+            return num;
+        }
+
+        function startGame() {
+            let display = document.getElementById('random_num');
+            let submit = document.getElementById('answerZone');
+
+            if (random == undefined) {
+                random = generateRandomNumber()
+                document.getElementById('random_num').innerHTML = random;
+                setTimeout(endGame, 3000);
+                displayNone()
+            } else {
+                display.style.display = 'block';
+                random = generateRandomNumber()
+                document.getElementById('random_num').innerHTML = random;
+                setTimeout(endGame, 3000);
+                displayNone()
+            }
+        }
+
+        function endGame() {
+            let submit = document.getElementById('random_num');
+            submit.style.display = 'none';
+        }
+
+        function displayNone() {
+            let submit = document.getElementById('answerZone');
+            submit.style.display = 'none';
+        }
+
+        function submit() {
+            let submit = document.getElementById('answerZone');
+            let answer = document.getElementById('submitText').value;
+
+
+            console.log(answer);
+
+            if (random == answer) {
+                submit.style.display = 'block';
+                submit.innerHTML = "정답입니다!";
+            } else {
+                submit.style.display = 'block';
+                submit.innerHTML = `오답입니다. 정답은 ${random}입니다.`;
+
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>
